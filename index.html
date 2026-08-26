@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Flip Cards</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Phetsarath OT', 'Noto Sans Lao', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            padding: 40px 20px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* Container ຈັດ layout ແບບ Grid 3 ຖໍ້າ x 2 ແຖວ */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ໂຄງສ້າງ Flip Card 3D */
+        .card {
+            background-color: transparent;
+            width: 100%;
+            height: 380px;
+            perspective: 1000px; /* ສ້າງມິຕິ 3D */
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        /* ເມື່ອກົດ ຫຼື Hover ໃຫ້ປິ່ນ 180 ອົງສາ */
+        .card:hover .card-inner,
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* ດ້ານໜ້າ ແລະ ດ້ານຫຼັງ */
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Style ດ້ານໜ້າ */
+        .card-front {
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        .card-front img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #4F46E5;
+            margin-bottom: 15px;
+        }
+
+        .card-front h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .card-front p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Style ດ້ານຫຼັງ */
+        .card-back {
+            background: linear-gradient(135deg, #6366F1, #4F46E5);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .card-back img {
+            width: 100%;
+            height: 100%;
+            /* object-fit: cover; */
+            border-radius: 10px;
+            /* margin-bottom: 15px; */
+        }
+
+        .card-back h4 {
+            margin-bottom: 8px;
+        }
+
+        .card-back p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .hint {
+            margin-top: 10px;
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="title">ແນະນຳທີມງານ (6 Profile Cards)</h2>
+
+    <div class="card-container">
+        <!-- Card 1 -->
+        <div class="card" onclick="this.classList.toggle('flipped')">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="./582699977_122254546244037398_2908485773862241929_n.jpg" alt="Profile 1 Front">
+                    <h3>ຕາວັນ</h3>
+                    <p>ສາຍ ໄອທີ ແລະ ເທຣດເດີ</p>
+                    <span class="hint">⚡ໂສດ </span>
+                </div>
+                <div class="card-back">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeT3zvVeqYgNEWSKky3QkyQ6vk_gsxKB0H1uiaOzqUvxaJyIO-T6vRlg0&s=10" alt="Profile 1 Back">
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card" onclick="this.classList.toggle('flipped')">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="./495948552_660191776993090_40958254023055797_n.jpg" alt="Profile 2 Front">
+                    <h3>ທິດນາວ່າງ</h3>
+                    <p>ສາຍ ເຮັດວຽກ</p>
+                    <span class="hint">⚡ ຮັກແຟນຄົນດຽວ</span>
+                </div>
+                <div class="card-back">
+                    <img src="data:image/jpeg;base64,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" alt="Profile 2 Back">
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card" onclick="this.classList.toggle('flipped')">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="./619980985_1854307188548876_847459994805080467_n.jpg" alt="Profile 3 Front">
+                    <h3>ບຸນນາລີ</h3>
+                    <p>ສາຍ ເຮັດວຽກ</p>
+                    <span class="hint">⚡ ຮັກແຟນຄົນດຽວ</span>
+                </div>
+                <div class="card-back">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6yjt9-nlFpc4wVnpHhmwn3sRWTUN4ZxjSSh74g-EaSg&s=10" alt="Profile 3 Back">
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card" onclick="this.classList.toggle('flipped')">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="./622672182_758631310623520_5127083902119327517_n.jpg" alt="Profile 4 Front">
+                    <h3>ບຸນມາ</h3>
+                    <p>ສາຍ ເກມ</p>
+                    <span class="hint">⚡ ໂສດ</span>
+                </div>
+                <div class="card-back">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPmeI9Nj9othc455T2wO3GfyVXXAje3NGj0HQaWA702w&s=10" alt="Profile 4 Back">
+                  
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card" onclick="this.classList.toggle('flipped')">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://scontent.fvte5-1.fna.fbcdn.net/v/t39.30808-1/764953986_1632863115107039_5513376232281583450_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x2048&ctp=s200x200&_nc_cat=101&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=1d2534&_nc_eui2=AeEKv365ffh7pOvJPYBMJrYTmP0oxPREfxmY_SjE9ER_GdESTOQ1_5n6eORMhFfhU__BMusvXinQNvnoebkuGoLq&_nc_ohc=2oM61kTjZesQ7kNvwHhtuJV&_nc_oc=Adr_umfOH1g5P7hU0c46G-nJfMhG6QDt2lBZLP195hXfWe16ACPL6DJDQOYvZKXQQZw&_nc_zt=24&_nc_ht=scontent.fvte5-1.fna&_nc_gid=w6v5RW23r3J6a8SL3su21Q&_nc_ss=7b2a8&oh=00_AQFtLZRRBwHtMmcG0Uj3-pjVdXgNLGB9x7hFutbcNRlQgw&oe=6A94BC65" alt="Profile 5 Front">
+                    <h3>ຊາລີ</h3>
+                    <p>ສາຍ ພາສາຈີນ ແລະ ໄອທີ</p>
+                    <span class="hint">⚡ ກົດ ຫຼື ຊີ້ໃສ່ເພື່ອປິ່ນ</span>
+                </div>
+                <div class="card-back">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQS7pQDnpYJDvphg8vs8UT-0-oVXwpeJOCNfLTE9hyEcQ&s=10" alt="Profile 5 Back">
+                    
+                </div>
+            </div>
+        </div> 
+
+        <!-- Card 6 -->
+        <div class="card" onclick="this.classList.toggle('flipped')">
+            <div class="card-inner">
+                <div class="card-front">
+                    <img src="https://scontent.fvte3-1.fna.fbcdn.net/v/t39.30808-1/706814391_978561321741300_198051827050844817_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx2048x2048&ctp=s200x200&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=1d2534&_nc_eui2=AeGMS4Hv1M1HUod1W80Hkhah4XdfomzP8yLhd1-ibM_zIjCrsk4mjuGIUZCuNnO3JW8J0tIHjzKxbWWs8zr8rSs4&_nc_ohc=GJmB_LxU-9gQ7kNvwGfaCwu&_nc_oc=Adpb44qSK5VTzuFU8jMrcvxs0ivWDbQrf4UMkZxOgEyVC4sqX9usM4Ld25xhp2EQ1Fs&_nc_zt=24&_nc_ht=scontent.fvte3-1.fna&_nc_gid=_dQ-Ik72oytbDCYoyy7X5g&_nc_ss=7b2a8&oh=00_AQEhB3bsMnfxJT-wpM1muDl-jS2Z725UU-Nqb_h_8xABkQ&oe=6A94DC19" alt="Profile 6 Front">
+                    <h3>ດີລີ</h3>
+                    <p>ສາຍ ພາສາຈີນ</p>
+                    <span class="hint">⚡ ຮັກແທ້</span>
+                </div>
+                <div class="card-back">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe5wkr84W4tCl0huV5JX4fKuBfpUqY3oNFauR9GCVBCECAW8_jc9rDmk4&s=10" alt="Profile 6 Back">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
